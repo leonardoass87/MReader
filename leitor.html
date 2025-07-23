@@ -1,0 +1,67 @@
+<!-- leitor.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leitor de Mangá</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+    .image-container img {
+      max-width: 100%;
+      margin-bottom: 20px;
+      border: 1px solid #222;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="titulo">Carregando mangá...</h1>
+  </header>
+  <main class="image-container" id="reader"></main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const manga = params.get('manga');
+    const capitulo = params.get('capitulo');
+
+    const titulo = document.getElementById('titulo');
+    const reader = document.getElementById('reader');
+
+    titulo.textContent = `${manga.toUpperCase()} - Capítulo ${capitulo}`;
+
+    let page = 1;
+
+    function pad(n) {
+      return n.toString().padStart(2, '0');
+    }
+
+    function loadNextImage() {
+      const img = new Image();
+      img.src = `mangas/${manga}/capitulo_${pad(capitulo)}/pag_${pad(page)}.jpg`;
+      img.onload = () => {
+        reader.appendChild(img);
+        page++;
+        loadNextImage();
+      };
+      img.onerror = () => {
+        console.log(`Fim das páginas (pag_${pad(page)}.jpg não encontrado)`);
+      };
+    }
+
+    loadNextImage();
+  </script>
+</body>
+</html>
