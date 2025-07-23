@@ -1,0 +1,37 @@
+# Ignorar imagens de capítulos
+mangas/*/capitulo_*/pag_*.jpg
+
+# Ignorar assets de imagens em geral
+*.png
+*.jpeg
+*.jpg
+*.gif
+*.webp
+
+# Ignorar pastas de sistema
+.DS_Store
+Thumbs.db
+
+# VSCode configs locais
+.vscode/
+
+# Ambientes
+.env
+.env.*
+
+# Node (caso use futuramente)
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Backup temporários do sistema
+*.bak
+*.tmp
+*.swp
+
+# Live Server cache
+.liveserver.json
